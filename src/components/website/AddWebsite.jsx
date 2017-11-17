@@ -62,7 +62,7 @@ class AddWebsite extends Component {
     };  
     return(  
       <div>  
-        <Modal title="新建用户" visible={this.props.visible} onCancel={this.handleOk.bind(this)} onOk={this.handleSubmit.bind(this)}>  
+        <Modal title="新建" visible={this.props.visible} onCancel={this.handleOk.bind(this)} onOk={this.handleSubmit.bind(this)}>  
           <Form>  
             <FormItem {...formItemLayout} label = "描述"  hasFeedback>  
               {getFieldDecorator('description', {  

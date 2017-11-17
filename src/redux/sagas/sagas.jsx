@@ -1,4 +1,4 @@
-import { takeLatest, takeEvery, select, put, call } from 'redux-saga/effects';
+import { takeLatest, takeEvery, select, put, call, fork, cps, take, cancelled } from 'redux-saga/effects';
 import axios from 'axios';
 import {
   loginFailureAction,
@@ -19,17 +19,20 @@ import {
 import mockData from './mockdata';
 
 const getEntries = state => state.websites;
-
 function* loginUserAsync() {
   console.log('loginUserAsync');
   yield put(loginFailureAction(Math.random() +''));
 }
 
 function* getPageWebsitesAsync(action) {
-  var p = yield axios.get('http://123.206.195.13:5555/api/v1/memo/page', {
+  // var p = yield axios.get('http://123.206.195.13:5555/api/v1/memo/page', {
+  //   params : action.filter
+  // })
+
+  var p = yield call([axios, axios.get], 'http://123.206.195.13:5555/api/v1/memo/page', {
     params : action.filter
   })
-  console.log(p.data);
+  console.log(p, 'x');
   yield put(pageWebsiteSuccess(p.data));
 }
 

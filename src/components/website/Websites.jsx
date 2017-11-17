@@ -12,8 +12,13 @@ import {
   addWebsite, 
   editWebsite, 
   deleteWebsites,
- pageWebsite
+  pageWebsite
 } from '../../redux/actions/website';
+
+import {
+  testFooAction, 
+  testAction,
+} from '../../redux/actions/test';
 
 @connect(
   (state) => {
@@ -22,7 +27,7 @@ import {
       websites: state.websites,
     });
   },
-  {pageWebsite, addWebsite, editWebsite, deleteWebsites} //调用的时候会触发对应的saga
+  {pageWebsite, addWebsite, editWebsite, deleteWebsites, testFooAction, testAction} //调用的时候会触发对应的saga
 ) 
 class Websites extends React.Component {  
   constructor(props) {//   构造函数  
@@ -59,6 +64,14 @@ class Websites extends React.Component {
 
   componentWillMount() {
     this.props.pageWebsite();
+
+    this.props.testAction('TEST_TAKE', 1)
+    this.props.testAction('TEST_FORK', 1)
+    this.props.testAction('TEST_EVERY', 1)
+    this.props.testAction('TEST_EVERY', 2)
+
+    this.props.testAction('TEST_LATEST', 1)
+    this.props.testAction('TEST_LATEST', 2)
   }
 
     // 当props变化的时候触发
